@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
+const Accept = styled.button`
+
+`
+
 const Contenedor = styled.div`
 width: 30vw;
 display: flex;
@@ -80,6 +84,9 @@ export default function Hour ({day, month, year, soccerFieldId}) {
       {
         hour.map((x,i) => <Button key={i} type={x.state} onClick={()=>selec(x)}>{x.hour}</Button>)
       }
+      <Accept>Cancelar</Accept>
+      <Accept>Confirmar</Accept>
+        
     </Contenedor>
   )
 }
