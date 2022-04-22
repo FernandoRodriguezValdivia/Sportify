@@ -23,7 +23,7 @@ background: ${props => props.type==='busy'? "#333" : props.type==='availableSele
 `
 
 const getAll = async(data)=>{
-    let response = await fetch('http://localhost:3001/api/reservation', {
+    let response = await fetch(`http://localhost:3001/api/reservation/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -32,32 +32,19 @@ const getAll = async(data)=>{
     return response
 }
 
-const Array =[
-    {hour: 10, state: 'busy'},
-    {hour: 11, state: 'busy'},
-    {hour: 12, state: 'availableNoSelected'},
-    {hour: 13, state: 'availableNoSelected'},
-    {hour: 14, state: 'availableNoSelected'},
-    {hour: 15, state: 'busy'},
-    {hour: 16, state: 'availableNoSelected'},
-    {hour: 17, state: 'availableNoSelected'},
-    {hour: 18, state: 'availableNoSelected'},
-    {hour: 19, state: 'availableNoSelected'},
-    {hour: 20, state: 'availableNoSelected'},
-    {hour: 21, state: 'availableNoSelected'},
-    {hour: 22, state: 'busy'}]
-
 
 export default function Hour ({day, month, year, soccerFieldId}) {
-    const [hour, setHour] = useState(Array)
+    const [hour, setHour] = useState([])
     const history = useHistory()
     const [selection, setSelection] = useState([])
     const { user } = useContext(UserContext);
     useEffect(()=>{
-        getAll({day, month, year, soccerFieldId})
-        .then(data=>data.json)
-        .then(data=>setHour(data))
-    })
+        getAll({day, month, year, soccerFieldId: soccerFieldId.id})
+        .then(data=>{
+            console.log(data)
+            setHour(data)
+        })
+    },[day, month, year, soccerFieldId])
     const selec = (x)=>{
         if(user.name === ""){
             history.push('/login/user')

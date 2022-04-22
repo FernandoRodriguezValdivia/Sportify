@@ -105,7 +105,7 @@ const GridCanchitaItem = ({ canchita }) => {
         <Box>
           <Link
             to={{
-              pathname: `/canchita/${canchita.id}`,
+              pathname: `/canchita/${canchita._id}`,
               state: canchita,
             }}
           >
@@ -160,7 +160,7 @@ function GridCanchita({url = 'http://localhost:3001/api/soccerField/all'}) {
       <Box p={4}>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={0}>
           {gridItem.map((item) => {
-            return <GridCanchitaItem key={item.id} canchita={item} />;
+            return <GridCanchitaItem key={item._id} canchita={item} />;
           })}
         </SimpleGrid>
       </Box>

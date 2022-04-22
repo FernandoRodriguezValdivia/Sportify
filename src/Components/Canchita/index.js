@@ -14,6 +14,7 @@ import {useParams} from 'react-router-dom'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Hour from '../Hour'
+import './style.css'
 
 function Canchita({ location }) {
   const id = useParams()
@@ -21,7 +22,7 @@ function Canchita({ location }) {
   const [value, onChange] = useState(new Date());
 
   const isDisabled = ({activeStartDate, date, view }) => {
-    return date.getDay() === 4 }
+    return date.getDay() === 1 }
   if (!state) {
     window.location = "/";
   }
