@@ -22,7 +22,7 @@ border-radius: 15px;
 `
 const obtener = (setReservas) =>{
   axios
-      .get('http://localhost:3001/api/reservation/user',{ headers: {
+      .get('http://localhost:3001/api/reservation/owner',{ headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('token')
         }})
       .then(({ data }) => {
@@ -30,7 +30,7 @@ const obtener = (setReservas) =>{
       });
 }
 
-const Reserva = () => {
+const ReservaOwner = () => {
     const [reservas, setReservas] = useState([])
     const [loading, setLoading] = useState(false)
     useEffect(() => {
@@ -74,7 +74,7 @@ const Reserva = () => {
             return(
                 <Contenedor>
                     <div>
-                    <p><b>{item.name}</b></p>
+                    <p><b>{item.nameUser}</b></p>
                     <p>Hora: {item.time}:00 h</p>
                     <p>Fecha: {data}</p>
                     <p>Dirección: Av Siempre viva 123 Villa Maria del triunfo</p>
@@ -89,4 +89,4 @@ const Reserva = () => {
   )
 }
 
-export default Reserva
+export default ReservaOwner

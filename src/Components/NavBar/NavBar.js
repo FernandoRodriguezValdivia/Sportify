@@ -22,8 +22,12 @@ export default function NavBar() {
     history.push("/login");
   };
   const reservas = () =>{
-    
-    history.push('/reserva')
+    if(localStorage.getItem('type')==="user"){
+      history.push('/reservauser')
+    }
+    if(localStorage.getItem('type')==="owner"){
+      history.push('/reservaowner')
+    }
   }
 
   return (
