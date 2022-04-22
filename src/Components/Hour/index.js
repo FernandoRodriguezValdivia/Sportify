@@ -1,19 +1,27 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-const Accept = styled.button`
-
+const Contenedor = styled.div`
+display: flex;
+flex-direction: column;
 `
 
-const Contenedor = styled.div`
-width: 30vw;
+const Accept = styled.button`
+background: #42a692;
+border-radius: 25px;
+padding: 10px 15px;
+margin: 10px;
+margin-top: 20vh;
+`
+
+const Hours = styled.div`
+width: 50vw;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 align-items: center;
-justify-content: center;
-border: 1px solid #000;
-`
+justify-content: center;`
+
 
 const Button = styled.button`
 border: none;
@@ -80,13 +88,18 @@ export default function Hour ({day, month, year, soccerFieldId}) {
         }
     }
   return (
-    <Contenedor>
-      {
-        hour.map((x,i) => <Button key={i} type={x.state} onClick={()=>selec(x)}>{x.hour}</Button>)
-      }
-      <Accept>Cancelar</Accept>
-      <Accept>Confirmar</Accept>
+      <Contenedor>
+        <Hours>
+        {
+            
+            hour.map((x,i) => <Button key={i} type={x.state} onClick={()=>selec(x)}>{x.hour}</Button>)
+        }   
+        </Hours>
+        <Hours>
+            <Accept>Cancelar</Accept>
+            <Accept>Confirmar</Accept>  
+        </Hours>
         
-    </Contenedor>
+      </ Contenedor>
   )
 }

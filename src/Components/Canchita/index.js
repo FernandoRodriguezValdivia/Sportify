@@ -49,7 +49,7 @@ function Canchita({ location }) {
             </SimpleGrid>
           </Box>
         </Box>
-        <Box w="700px" display="flex" alignItems="center" justifyContent="space-around">
+        <Box w="80vw" display="flex" flexDirection={"row"} alignItems={"center"} justifyContent={"center"} margin={"auto"}>
             <Calendar minDate={new Date()} tileDisabled={isDisabled} onChange={onChange} value={value} />
             <Box>
               <Hour 
