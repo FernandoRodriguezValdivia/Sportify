@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import spinner from '../../images/loading.gif'
+import {useContext} from 'react'
+import { UserContext } from '../../context/userContext';
 
 const GridCanchitaItem = ({ canchita }) => {
   const history = useHistory()
@@ -76,17 +78,27 @@ const GridCanchitaItem = ({ canchita }) => {
 };
 
 function GridCanchita({url = 'http://localhost:3001/api/soccerField/all'}) {
+  const { search } = useContext(UserContext);
   const [gridItem, setGridItem] = useState([]);
   const [loading, setLoading] = useState()
   useEffect(() => {
     setLoading(true)
-    axios
+    if(search===''){
+      axios
       .get(url)
       .then(({ data }) => {
         setGridItem(data);
         setLoading(false)
       });
-  }, []);
+    } else {
+      axios
+      .get(`http://localhost:3001/api/soccerField/search?buscar=${search}`)
+      .then(({ data }) => {
+        setGridItem(data);
+        setLoading(false)
+      });
+    }
+  }, [search]);
 
   return (
     <Box p={20}>
@@ -94,7 +106,10 @@ function GridCanchita({url = 'http://localhost:3001/api/soccerField/all'}) {
             <Center>
             <img src={spinner} alt='cargando' style={{width: '50px'}}></img>
             </Center>
-            :
+            : gridItem.length === 0?
+              <p>No hay coincidencias con la busqueda</p>:
+
+            
       <Box p={4}>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={0}>
           {gridItem.map((item) => {

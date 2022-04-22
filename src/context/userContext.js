@@ -3,7 +3,8 @@ import React, { useState, createContext } from 'react';
 const UserContext = createContext(undefined);
 
 function UserProvider(props) {
-  const [user, setUser] = useState({ token: '', name: '',type:'' });
+  const [user, setUser] = useState({ token: '', name: '',type:''});
+  const [search, setSearch] = useState('')
 
   const Initialize = () => {
     if (localStorage.getItem('token') !== null) {
@@ -32,7 +33,7 @@ function UserProvider(props) {
 
   return (
     <UserContext.Provider value={{
-      user, setUser, Initialize, ChangeTokenState, ClearTokenState,
+      user, setUser, Initialize, ChangeTokenState, ClearTokenState, search, setSearch
     }}
     >
       {props.children}
