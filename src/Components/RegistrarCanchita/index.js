@@ -21,7 +21,7 @@ export default function RegistrarCanchita() {
     setUser({ ...userState, [name]: value });
   };
   const cancel = ()=>{
-    history.push('/createOwner')
+    history.push('/gridowner')
   }
   const submit = (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ export default function RegistrarCanchita() {
               'Content-Type': 'application/json',
             },
           });
-        history.push('/createOwner')
+        history.push('/gridowner')
     };
   };
 
@@ -85,8 +85,8 @@ export default function RegistrarCanchita() {
               onChange={handleChange}
             ></input>
             <input
-              type='price'
-              name="number"
+              type='number'
+              name="price"
               placeholder="Ingresa el Precio en S/ ."
               onChange={handleChange}
             ></input>
