@@ -73,9 +73,6 @@ import {
   
     return (
       <Box p={20}>
-          <Button>
-            Cerrar sesión
-          </Button>
           <Box p={4}>
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={0}>
               {gridItem.map((item) => {
