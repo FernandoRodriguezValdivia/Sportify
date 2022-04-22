@@ -105,7 +105,7 @@ const GridCanchitaItem = ({ canchita }) => {
         <Box>
           <Link
             to={{
-              pathname: `/canchita/${canchita.id}`,
+              pathname: `/canchita/${canchita._id}`,
               state: canchita,
             }}
           >
@@ -116,12 +116,17 @@ const GridCanchitaItem = ({ canchita }) => {
         </Box>
         <Box></Box>
         <Heading mt={4} noOfLines={1} size='xs' fontWeight='Bold'>
-          {canchita.title}
+          {canchita.name}
         </Heading>
         <Spacer />
         <Box>
           <Heading mt={4} noOfLines={1} size='xs' fontWeight='Normal'>
-            {canchita.category}
+            {canchita.direction}
+          </Heading>
+        </Box><Spacer />
+        <Box>
+          <Heading mt={4} noOfLines={1} size='xs' fontWeight='Normal'>
+            {`Horario: ${canchita.start}:00 h hasta ${canchita.end}:00 h`}
           </Heading>
         </Box>
         <Stack>
@@ -139,7 +144,7 @@ const GridCanchitaItem = ({ canchita }) => {
   );
 };
 
-function GridCanchita({url = 'https://raw.githubusercontent.com/jveracal553/Sportify/feature/SFY-67-create_navbar/canchitainfo'}) {
+function GridCanchita({url = 'http://localhost:3001/api/soccerField/all'}) {
   const [gridItem, setGridItem] = useState([]);
 
   useEffect(() => {
@@ -155,7 +160,7 @@ function GridCanchita({url = 'https://raw.githubusercontent.com/jveracal553/Spor
       <Box p={4}>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={0}>
           {gridItem.map((item) => {
-            return <GridCanchitaItem key={item.id} canchita={item} />;
+            return <GridCanchitaItem key={item._id} canchita={item} />;
           })}
         </SimpleGrid>
       </Box>
