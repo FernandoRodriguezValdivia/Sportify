@@ -38,14 +38,7 @@
   border: none;
 }
 
-.topnav__reservas {
-  color: #fff;
-  height: 30px;
-  width: 120px;
-  background-color: #42a692;
-  border-radius: 15px;
-  border: none;
-}
+
 
 .topnav__search-filter,
 .topnav__search-map {
