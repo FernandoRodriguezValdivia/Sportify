@@ -1,6 +1,6 @@
 import "./NavBar.css";
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import filter from "../../images/filter-solid.svg";
@@ -10,6 +10,7 @@ import SearchBar from "./Search";
 
 export default function NavBar() {
   const { user, ClearTokenState } = useContext(UserContext);
+  const location = useLocation()
   const history = useHistory();
   const login = () => {
     history.push("/login");
@@ -20,6 +21,10 @@ export default function NavBar() {
     //window.location.reload(false);
     history.push("/login");
   };
+  const reservas = () =>{
+    
+    history.push('/reserva')
+  }
 
   return (
     <div className="navbar">
@@ -30,14 +35,14 @@ export default function NavBar() {
             Sportify
           </Link>
         </div>
-        {window.location.pathname == "/" && <SearchBar />}
+        {location.pathname == "/" && <SearchBar />}
 
         {user.name !== "" ? (
           <>
             <button type="button" className="topnav__singin">
               {user.name}
             </button>
-            <button type="button" className="topnav__reservas" onClick={logoff}>
+            <button type="button" className="topnav__reservas" onClick={reservas}>
               Ver Reservas
             </button>
             <button type="button" className="topnav__singoff" onClick={logoff}>

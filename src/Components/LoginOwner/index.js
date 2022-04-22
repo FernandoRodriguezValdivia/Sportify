@@ -20,8 +20,12 @@ export default function LoginOwner() {
       body: JSON.stringify(userState),
     });
     response = await response.json()
-    ChangeTokenState(response.token, response.name, response.type);
-    history.push('/gridowner')
+    if(response.message === "Correo o contraseña incorrecta"){
+      alert(response.message)
+    }else{
+      ChangeTokenState(response.token, response.name, response.type);
+      history.push('/')
+    }
   }
   return (
     <div className='login'>

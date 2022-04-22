@@ -46,9 +46,6 @@ import {
               <Heading mt={4} noOfLines={1} size='xs' fontWeight='Normal'>
                 Desde S/{canchita.price}
               </Heading>
-              <Button colorScheme='teal' size='xs' ml={'55%'}>
-                Ver horarios
-              </Button>
             </Box>
           </Stack>
         </Box>

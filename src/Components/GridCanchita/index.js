@@ -9,10 +9,18 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import spinner from '../../images/loading.gif'
 
 const GridCanchitaItem = ({ canchita }) => {
+  const history = useHistory()
+  const go = () => {
+    history.push({
+      pathname: `/canchita/${canchita._id}`,
+      state: canchita,
+    })
+  }
   return (
     <div className='gridCanchitas'>
       <Box
@@ -57,7 +65,7 @@ const GridCanchitaItem = ({ canchita }) => {
             <Heading mt={4} noOfLines={1} size='xs' fontWeight='Normal'>
               Desde S/{canchita.price}
             </Heading>
-            <Button colorScheme='teal' size='xs' ml={'55%'}>
+            <Button colorScheme='teal' size='xs' ml={'55%'} onClick={go}>
               Ver horarios
             </Button>
           </Box>
@@ -69,17 +77,24 @@ const GridCanchitaItem = ({ canchita }) => {
 
 function GridCanchita({url = 'http://localhost:3001/api/soccerField/all'}) {
   const [gridItem, setGridItem] = useState([]);
-
+  const [loading, setLoading] = useState()
   useEffect(() => {
+    setLoading(true)
     axios
       .get(url)
       .then(({ data }) => {
         setGridItem(data);
+        setLoading(false)
       });
   }, []);
 
   return (
     <Box p={20}>
+      {loading? 
+            <Center>
+            <img src={spinner} alt='cargando' style={{width: '50px'}}></img>
+            </Center>
+            :
       <Box p={4}>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={0}>
           {gridItem.map((item) => {
@@ -87,6 +102,7 @@ function GridCanchita({url = 'http://localhost:3001/api/soccerField/all'}) {
           })}
         </SimpleGrid>
       </Box>
+      }
     </Box>
   );
 }

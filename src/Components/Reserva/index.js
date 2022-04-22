@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import axios from 'axios';
+import spinner from '../../images/loading.gif'
+import { Center } from "@chakra-ui/react";
 
 const Contenedor = styled.div`
 border: 1px solid #fff;
@@ -18,23 +20,54 @@ background: red;
 padding: 5px 15px;
 border-radius: 15px;
 `
+const obtener = (setReservas) =>{
+  axios
+      .get('http://localhost:3001/api/reservation/user',{ headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }})
+      .then(({ data }) => {
+        setReservas(data.data);
+      });
+}
 
 const Reserva = () => {
     const [reservas, setReservas] = useState([])
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
-        axios
-          .get('http://localhost:3001/api/reservation/user',{ headers: {
+        setLoading(true)
+        obtener(setReservas)
+        setTimeout(()=>
+        setLoading(false),1000
+      )
+    }
+      , []);
+    
+    const eliminar = async (id) => {
+      setLoading(true)
+      await axios
+          .delete(`http://localhost:3001/api/reservation/user/${id}`,{ headers: {
               'Authorization': 'Bearer ' + localStorage.getItem('token')
             }})
-          .then(({ data }) => {
-            setReservas(data.data);
-          });
-      }
-      , []);
+      obtener(setReservas)
+      setTimeout(()=>
+        setLoading(false),1000
+      )
+
+    }
   return (
     <div>
       <p style={{"fontSize": "25px"}}>Tus reservas:</p>
-      {
+      {   loading?
+
+
+          <Center>
+          <img src={spinner} alt='cargando' style={{width: '50px'}}></img>
+          </Center>
+          
+
+          
+          :
+
           reservas.map((item)=>{
             const date = new Date([item.year,item.month,item.day].join()).toLocaleDateString().split('/')
             const data = `${date[1]}/${date[0]}/${date[2]}`
@@ -46,10 +79,11 @@ const Reserva = () => {
                     <p>Fecha: {data}</p>
                     <p>Dirección: Av Siempre viva 123 Villa Maria del triunfo</p>
                     </div>
-                    <Button>Eliminar</Button>
+                    <Button onClick={()=>eliminar(item._id)}>Eliminar</Button>
                 </Contenedor>
             )
           })
+
       }
     </div>
   )
