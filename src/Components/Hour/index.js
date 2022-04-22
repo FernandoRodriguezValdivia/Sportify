@@ -34,6 +34,7 @@ const getAll = async(data)=>{
 
 
 export default function Hour ({day, month, year, soccerFieldId}) {
+    
     const [hour, setHour] = useState([])
     const history = useHistory()
     const [selection, setSelection] = useState([])
@@ -41,7 +42,6 @@ export default function Hour ({day, month, year, soccerFieldId}) {
     useEffect(()=>{
         getAll({day, month, year, soccerFieldId: soccerFieldId.id})
         .then(data=>{
-            console.log(data)
             setHour(data)
         })
     },[day, month, year, soccerFieldId])
