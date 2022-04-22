@@ -8,6 +8,7 @@ import {
   Stack,
   Tag,
   Text,
+  Button
 } from "@chakra-ui/react";
 import React, { useState } from 'react';
 import {useParams} from 'react-router-dom'
@@ -27,40 +28,42 @@ function Canchita({ location }) {
     window.location = "/";
   }
   return (
-    <Box>
-      <Box p={8} d="flex" alignItems="center">
-        <Box ml={4}>
-          <SimpleGrid spacing={4} columns={{ base: 1, md: 5 }}>
-            <GridItem colSpan={2}>
-              <Center>
-                <Image src={state.image} w={48}></Image>
-              </Center>
-            </GridItem>
-            <GridItem colSpan={3}>
-              <Stack spacing={4}>
-                <Box>
-                  <Heading>Price: ${state.price}</Heading>
-                  <Tag mt={2}>{state.category}</Tag>
-                </Box>
-                <Text>{state.description}</Text>
-              </Stack>
-            </GridItem>
-          </SimpleGrid>
-        </Box>
-      </Box>
-      <Box w="700px" display="flex" alignItems="center" justifyContent="space-around">
-          <Calendar minDate={new Date()} tileDisabled={isDisabled} onChange={onChange} value={value} />
-          <Box>
-            <Hour 
-            day={value.toLocaleDateString().split('/')[0]}
-            month={value.toLocaleDateString().split('/')[1]}
-            year={value.toLocaleDateString().split('/')[2]}
-            soccerFieldId={id}
-            />
+    <>
+      <Box>
+        <Box p={8} d="flex" alignItems="center">
+          <Box ml={4}>
+            <SimpleGrid spacing={4} columns={{ base: 1, md: 5 }}>
+              <GridItem colSpan={2}>
+                <Center>
+                  <Image src={state.image} w={48}></Image>
+                </Center>
+              </GridItem>
+              <GridItem colSpan={3}>
+                <Stack spacing={4}>
+                  <Box>
+                    <Heading>Price: ${state.price}</Heading>
+                    <Tag mt={2}>{state.category}</Tag>
+                  </Box>
+                  <Text>{state.description}</Text>
+                </Stack>
+              </GridItem>
+            </SimpleGrid>
           </Box>
+        </Box>
+        <Box w="700px" display="flex" alignItems="center" justifyContent="space-around">
+            <Calendar minDate={new Date()} tileDisabled={isDisabled} onChange={onChange} value={value} />
+            <Box>
+              <Hour 
+              day={value.toLocaleDateString().split('/')[0]}
+              month={value.toLocaleDateString().split('/')[1]}
+              year={value.toLocaleDateString().split('/')[2]}
+              soccerFieldId={id}
+              />
+            </Box>
+        </Box>
+          
       </Box>
-        
-    </Box>
+    </>
   );
 }
 
