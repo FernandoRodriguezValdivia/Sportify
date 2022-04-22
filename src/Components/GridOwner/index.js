@@ -11,7 +11,8 @@ import {
   import { useEffect, useState } from 'react';
   import { Link } from 'react-router-dom';
   import axios from 'axios';
- 
+
+
   const GridCanchitaItem = ({ canchita }) => {
     return (
       <div className='gridCanchitas'>
@@ -55,6 +56,8 @@ import {
     );
   };
   
+  
+
   function GridOwner({url = 'http://localhost:3001/api/soccerField'}) {
     const [gridItem, setGridItem] = useState([]);
   
@@ -70,13 +73,16 @@ import {
   
     return (
       <Box p={20}>
-        <Box p={4}>
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={0}>
-            {gridItem.map((item) => {
-              return <GridCanchitaItem key={item.id} canchita={item} />;
-            })}
-          </SimpleGrid>
-        </Box>
+          <Button>
+            Cerrar sesión
+          </Button>
+          <Box p={4}>
+            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={0}>
+              {gridItem.map((item) => {
+                return <GridCanchitaItem key={item.id} canchita={item} />;
+              })}
+            </SimpleGrid>
+          </Box>
         <Box p={4}>
           <Link to={'/registercanchita'}>Agregar canchita</Link>
         </Box>

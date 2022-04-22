@@ -1,6 +1,13 @@
 import { useState } from "react";
 import soccer from '../../images/soccer.jpg';
 import { Link } from "react-router-dom";
+import styled from 'styled-components'
+
+const ContenedorBotones = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+`
 
 
 export default function RegistrarCanchita() {
@@ -86,11 +93,14 @@ export default function RegistrarCanchita() {
 
           </form>
         </div>
-        <div>
-        <button className="login-text__button" type="submit" onClick={submit}>
-          Agregar Cancha
-        </button>
-        </div>
+        <ContenedorBotones>
+          <button className="login-text__button" type="submit" onClick={submit} style={{"width": "30%"}}>
+            Cancelar
+          </button>
+          <button className="login-text__button" type="submit" onClick={submit} style={{"width": "30%"}}>
+            Agregar
+          </button>
+        </ContenedorBotones>
       </div>
     </div>
   );
