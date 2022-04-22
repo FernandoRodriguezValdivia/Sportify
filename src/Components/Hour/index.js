@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import {useHistory} from 'react-router-dom'
 import { UserContext } from "../../context/userContext";
 import styled from 'styled-components'
@@ -38,7 +38,7 @@ const getAll = async(data)=>{
 
 
 export default function Hour ({day, month, year, soccerFieldId}) {
-    
+    const mountedRef = useRef(true)
     const [hour, setHour] = useState([])
     const history = useHistory()
     const [selection, setSelection] = useState([])
@@ -48,7 +48,35 @@ export default function Hour ({day, month, year, soccerFieldId}) {
         .then(data=>{
             setHour(data)
         })
+        return () => { mountedRef.current = false }
     },[day, month, year, soccerFieldId])
+    const cancel = () =>{
+        history.push('/')
+    }
+    const confirmar = async () =>{
+        if(selection.length ===0){
+            alert('no seas vivo selecciona algo')
+        }else{
+            const data = []
+            for(let el of selection ){
+                let aux = {day, month, year}
+                aux.time = el
+                data.push(aux)
+            }
+            const response = await fetch(`http://localhost:3001/api/reservation/create/${soccerFieldId.id}`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                 },
+                body: JSON.stringify({data}),
+              });
+              const resjson = await response.json()
+              console.log(resjson)
+              alert(resjson.sucess)
+              history.push('/')
+        }
+    }
     const selec = (x)=>{
         if(user.name === ""){
             history.push('/login/user')
@@ -80,8 +108,8 @@ export default function Hour ({day, month, year, soccerFieldId}) {
       {
         hour.map((x,i) => <Button key={i} type={x.state} onClick={()=>selec(x)}>{x.hour}</Button>)
       }
-      <Accept>Cancelar</Accept>
-      <Accept>Confirmar</Accept>
+      <Accept onClick={cancel}>Cancelar</Accept>
+      <Accept onClick={confirmar}>Confirmar</Accept>
         
     </Contenedor>
   )
