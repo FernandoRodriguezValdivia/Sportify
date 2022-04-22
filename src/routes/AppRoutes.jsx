@@ -10,6 +10,7 @@ import LoginUser from '../Components/LoginUser';
 import LoginOwner from '../Components/LoginOwner';
 import RegistrarCanchita from '../Components/RegistrarCanchita';
 import GridOwner from '../Components/GridOwner';
+import Reserva from '../Components/Reserva';
 
 function AppRoutes() {
     return (
@@ -31,6 +32,7 @@ function AppRoutes() {
         <Route path='/register' component={() => <SelecRegister />} />
         <Route path='/registercanchita' component={()=><RegistrarCanchita />}/>
         <Route path='/gridowner' component={()=><GridOwner />}/>
+        <Route path='/reservas' component={()=><Reserva/>}/>
 
         <Route>404 Page </Route>
       </Switch>
