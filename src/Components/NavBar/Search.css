@@ -29,6 +29,15 @@
   border: none;
 }
 
+.topnav__singoff {
+  color: #fff;
+  height: 30px;
+  width: 120px;
+  background-color: red;
+  border-radius: 15px;
+  border: none;
+}
+
 .topnav__search-filter,
 .topnav__search-map {
   display: flex;
