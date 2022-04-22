@@ -37,6 +37,9 @@ export default function NavBar() {
             <button type="button" className="topnav__singin">
               {user.name}
             </button>
+            <button type="button" className="topnav__reservas" onClick={logoff}>
+              Ver Reservas
+            </button>
             <button type="button" className="topnav__singoff" onClick={logoff}>
               Cerrar Sesion
             </button>

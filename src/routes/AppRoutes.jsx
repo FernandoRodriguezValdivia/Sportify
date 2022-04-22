@@ -32,7 +32,7 @@ function AppRoutes() {
         <Route path='/register' component={() => <SelecRegister />} />
         <Route path='/registercanchita' component={()=><RegistrarCanchita />}/>
         <Route path='/gridowner' component={()=><GridOwner />}/>
-        <Route path='/reservas' component={()=><Reserva/>}/>
+        <Route path='/reserva' component={()=><Reserva/>}/>        
 
         <Route>404 Page </Route>
       </Switch>
