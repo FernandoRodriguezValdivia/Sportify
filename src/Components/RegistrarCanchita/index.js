@@ -2,6 +2,7 @@ import { useState } from "react";
 import soccer from '../../images/soccer.jpg';
 import { Link } from "react-router-dom";
 import styled from 'styled-components'
+import { useHistory} from 'react-router-dom'
 
 const ContenedorBotones = styled.div`
   display: flex;
@@ -11,6 +12,7 @@ const ContenedorBotones = styled.div`
 
 
 export default function RegistrarCanchita() {
+  const history = useHistory()
   const [userState, setUser] = useState({});
   const [img, setImg] = useState()
 
@@ -18,6 +20,9 @@ export default function RegistrarCanchita() {
     const { name, value } = e.target;
     setUser({ ...userState, [name]: value });
   };
+  const cancel = ()=>{
+    history.push('/createOwner')
+  }
   const submit = (e) => {
     e.preventDefault();
     const reader = new FileReader();
@@ -31,6 +36,7 @@ export default function RegistrarCanchita() {
               'Content-Type': 'application/json',
             },
           });
+        history.push('/createOwner')
     };
   };
 
@@ -94,7 +100,7 @@ export default function RegistrarCanchita() {
           </form>
         </div>
         <ContenedorBotones>
-          <button className="login-text__button" type="submit" onClick={submit} style={{"width": "30%"}}>
+          <button className="login-text__button" onClick={cancel} style={{"width": "30%"}}>
             Cancelar
           </button>
           <button className="login-text__button" type="submit" onClick={submit} style={{"width": "30%"}}>
