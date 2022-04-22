@@ -112,7 +112,6 @@ export default function Hour ({day, month, year, soccerFieldId}) {
         }
     }
   return (
-
       <Contenedor>
         <Hours>
         {
@@ -121,9 +120,9 @@ export default function Hour ({day, month, year, soccerFieldId}) {
         }   
         </Hours>
         <Hours>
-            <Accept>Cancelar</Accept>
-            <Accept>Confirmar</Accept>  
-        </Hours>
+            <Accept onClick={cancel}>Cancelar</Accept>
+            <Accept onClick={confirmar}>Confirmar</Accept> 
+        </Hours>        
       </ Contenedor>
   )
 }
