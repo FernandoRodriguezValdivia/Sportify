@@ -21,7 +21,7 @@ export default function RegistrarCanchita() {
     setUser({ ...userState, [name]: value });
   };
   const cancel = ()=>{
-    history.push('/createOwner')
+    history.push('/gridowner')
   }
   const submit = (e) => {
     e.preventDefault();

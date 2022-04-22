@@ -55,7 +55,7 @@ export default function LoginUser() {
             <button className='login-text__button' type='submit' onClick={submit}>Ingresar</button>
         <div className='login-text__register small'>
           <p>¿No tienes una cuenta?</p>
-          <Link to={'/register'} className='login-text__register-link link small color'>
+          <Link to={'/register/user'} className='login-text__register-link link small color'>
             Regístrate aquí
           </Link>
         </div>

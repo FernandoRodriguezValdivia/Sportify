@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import {useHistory} from 'react-router-dom'
+import { UserContext } from "../../context/userContext";
 import styled from 'styled-components'
 
 const Contenedor = styled.div`
@@ -48,11 +50,18 @@ const Array =[
 
 export default function Hour ({day, month, year, soccerFieldId}) {
     const [hour, setHour] = useState(Array)
+    const history = useHistory()
     const [selection, setSelection] = useState([])
+    const { user } = useContext(UserContext);
     useEffect(()=>{
-        const h = getAll({day, month, year, soccerFieldId})
+        getAll({day, month, year, soccerFieldId})
+        .then(data=>data.json)
+        .then(data=>setHour(data))
     })
     const selec = (x)=>{
+        if(user.name === ""){
+            history.push('/login/user')
+        }
         if(x.state !== 'busy'){
             if(x.state === 'availableNoSelected'){ 
                 setSelection([...selection, x.hour])
